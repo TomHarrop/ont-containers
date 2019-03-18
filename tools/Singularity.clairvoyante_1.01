@@ -13,7 +13,7 @@ From: opensciencegrid/osgvo-tensorflow-gpu:latest
 
 %runscript
 
-    exec /usr/bin/python2 /root/Clairvoyante/clairvoyante.py "$@"
+    exec /usr/bin/python2 /clairvoyante/clairvoyante.py "$@"
 
 %post
     # dependencies
