@@ -14,7 +14,7 @@ From: python:3.7.3-alpine3.9
         build-base \
         perl
 
-    pip3 install qcat=1.0.1
+    pip3 install qcat==1.0.1
 
 %runscript
     exec /usr/local/bin/qcat "$@"
