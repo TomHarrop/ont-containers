@@ -27,6 +27,12 @@ From: python:2.7.16-buster
         scikit-learn==0.18.0 \
         scipy
 
+    # ucsc's gff3ToGenePred
+    wget \
+        -O /usr/local/bin/gff3ToGenePred \
+    http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gff3ToGenePred
+    chmod 755 /usr/local/bin/gff3ToGenePred
+
     # chopchop
     git clone \
         https://bitbucket.org/valenlab/chopchop.git
