@@ -42,15 +42,21 @@ _EOF_
         zlib1g-dev 
 
     # medaka gpu
-    git lfs clone https://github.com/nanoporetech/medaka.git
+    GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/nanoporetech/medaka.git
     cd medaka || exit 1
-    git checkout 7574cf1
+    git lfs pull
+    git checkout \
+        \ --recurse-submodules --force \
+        7574cf1
     sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
     make install # this builds the binaries in bincache and installs into venv
 
     # now install system-wide
     /usr/local/bin/pip3 install -r requirements.txt
     MEDAKA_BINARIES=1 python3 setup.py install
+
+    # tidy up
+    rm -r /medaka
 
 %runscript
     exec /usr/local/bin/medaka "$@"
