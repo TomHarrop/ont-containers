@@ -44,10 +44,10 @@ _EOF_
     # medaka gpu
     GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/nanoporetech/medaka.git
     cd medaka || exit 1
-    git lfs pull
     git checkout \
         --recurse-submodules --force \
         7574cf1
+    git lfs pull
     sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
     make install # this builds the binaries in bincache and installs into venv
 
