@@ -49,5 +49,5 @@ _EOF_
     make install # this builds the binaries in bincache and installs into venv
 
     # now install system-wide
-    pip3 install -r requirements.txt
+    /usr/local/bin/pip3 install -r requirements.txt
     MEDAKA_BINARIES=1 python3 setup.py install
