@@ -46,7 +46,7 @@ _EOF_
     cd medaka || exit 1
     git lfs pull
     git checkout \
-        \ --recurse-submodules --force \
+        --recurse-submodules --force \
         7574cf1
     sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
     make install # this builds the binaries in bincache and installs into venv
