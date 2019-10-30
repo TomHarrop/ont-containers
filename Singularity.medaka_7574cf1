@@ -10,9 +10,8 @@ From: tensorflow/tensorflow:1.14.0-gpu-py3
     VERSION "medaka 7574cf1"
 
 %post
-    export DEBIAN_FRONTEND=noninteractive
-
     # faster apt downloads, will it break?
+    export DEBIAN_FRONTEND=noninteractive
     (
         . /etc/os-release
         cat << _EOF_ > mirror.txt
