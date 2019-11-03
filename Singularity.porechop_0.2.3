@@ -2,17 +2,14 @@ Bootstrap: docker
 From: python:3.6.6-stretch
 
 %help
-
     Porechop 0.2.3
     https://github.com/rrwick/Porechop
 
 %labels
-
     MAINTAINER "Tom Harrop"
     VERSION "Porechop 0.2.3"
 
 %post
-
     # install dependencies
     apt-get update
     apt-get install -y \
@@ -32,6 +29,5 @@ From: python:3.6.6-stretch
     rm -rf porechop porechop.tar.gz
 
 %runscript
-
     exec /usr/local/bin/porechop "$@"
     
