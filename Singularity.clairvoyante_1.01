@@ -2,17 +2,14 @@ Bootstrap: shub
 From: opensciencegrid/osgvo-tensorflow-gpu:latest
 
 %help
-
     Clairvoyante 1.01
     https://github.com/aquaskyline/Clairvoyante/releases
     
 %labels
-
     MAINTAINER "Tom Harrop (twharrop@gmail.com) "
     VERSION "Clairvoyante 1.01"
 
 %runscript
-
     exec /usr/bin/python2 /clairvoyante/clairvoyante.py "$@"
 
 %post
