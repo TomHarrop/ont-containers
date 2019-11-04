@@ -40,5 +40,4 @@ From: python:2.7.16-buster
     git checkout a301f2d
 
 %environment
-
     export PATH="${PATH}:/chopchop:/chopchop/bowtie:/chopchop/svm_light"
