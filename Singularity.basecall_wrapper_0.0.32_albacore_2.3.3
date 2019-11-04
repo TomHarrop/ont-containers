@@ -16,8 +16,8 @@ From: rocker/tidyverse:3.5.1
 %post
 
     # install apt packages
-    apt-get update
-    apt-get install -y \
+    apt-get -o Acquire::Check-Valid-Until=false update
+    apt-get -o Acquire::Check-Valid-Until=false install -y \
         default-jre \
         graphviz \
         python3-pip
@@ -65,4 +65,3 @@ From: rocker/tidyverse:3.5.1
 
     # link R
     ln -s /usr/local/bin/Rscript /usr/bin/Rscript
-    
