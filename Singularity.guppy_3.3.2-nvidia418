@@ -38,8 +38,8 @@ _EOF_
     apt update
     apt-get install -y \
         --no-install-recommends \
-        libcuda1-410 \
-        nvidia-410
+        libcuda1-418 \
+        nvidia-418
 
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
