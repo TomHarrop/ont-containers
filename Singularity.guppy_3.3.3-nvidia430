@@ -2,11 +2,11 @@ Bootstrap: docker
 From: ubuntu:16.04
 
 %help
-    Guppy 3.3.2 with nvidia-410
+    Guppy 3.3.3 with nvidia-430
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 3.3.2"
+    VERSION "Guppy 3.3.3"
 
 %post
     # faster apt downloads, will it break?
@@ -38,8 +38,8 @@ _EOF_
     apt update
     apt-get install -y \
         --no-install-recommends \
-        libcuda1-418 \
-        nvidia-418
+        libcuda1-430 \
+        nvidia-430
 
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
@@ -51,7 +51,7 @@ _EOF_
     apt-get update
     apt-get install -y \
         --no-install-recommends \
-        ont-guppy=3.3.2-1~xenial
+        ont-guppy=3.3.3-1~xenial
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"
