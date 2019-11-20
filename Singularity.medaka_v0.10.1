@@ -7,7 +7,7 @@ From: tensorflow/tensorflow:1.14.0-gpu-py3
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "medaka 7574cf1"
+    VERSION "medaka v0.10.1"
 
 %post
     # faster apt downloads, will it break?
@@ -45,7 +45,7 @@ _EOF_
     cd medaka || exit 1
     git checkout \
         --recurse-submodules --force \
-        7574cf1
+        v0.10.1
     git lfs pull
     sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
     make install # this builds the binaries in bincache and installs into venv
