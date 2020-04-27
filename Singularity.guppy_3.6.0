@@ -2,14 +2,14 @@ Bootstrap: docker
 From: ubuntu:16.04
 
 %help
-    Guppy 3.4.1 without nvidia drivers
+    Guppy 3.6.0 without nvidia drivers
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 3.4.1"
+    VERSION "Guppy 3.6.0"
 
 %post
-    # faster apt downloads, will it break?
+    # faster apt downloads
     export DEBIAN_FRONTEND=noninteractive
     (
         . /etc/os-release
@@ -51,7 +51,7 @@ _EOF_
     apt-get update
     apt-get install -y \
         --no-install-recommends \
-        ont-guppy=3.4.4-1~xenial
+        ont-guppy=3.6.0-1~xenial
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"
