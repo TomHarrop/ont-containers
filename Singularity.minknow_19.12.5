@@ -42,6 +42,7 @@ _EOF_
     apt install -y \
         apt-transport-https \
         libasound2 \
+        libcanberra-gtk-module \
         libgconf-2-4 \
         libgtk-3-dev \
         libnss3 \
@@ -58,5 +59,5 @@ _EOF_
     apt install -y minknow-nc=19.12.5-1~bionic
 
 %startscript
-    /opt/ONT/MinKNOW/bin/mk_manager_svc &
-    nohup /opt/ui/MinKNOW > /dev/null 2>&1 < /dev/null &
+    /opt/ont/minknow/bin/mk_manager_svc &
+    nohup /opt/ont/minknow-ui/MinKNOW > /dev/null 2>&1 < /dev/null &

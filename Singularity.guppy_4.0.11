@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:16.04
+From: ubuntu:18.04
 
 %help
     Guppy 4.0.11 without nvidia drivers
@@ -48,6 +48,7 @@ _EOF_
     #     libcuda1-430 \
     #     nvidia-430
 
+
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
     wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub \
@@ -56,9 +57,10 @@ _EOF_
         "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" \
         | tee /etc/apt/sources.list.d/nanoporetech.sources.list 
     apt-get update
+
     apt-get install -y \
         --no-install-recommends \
-        ont-guppy=4.0.11-1~xenial
+        ont-guppy=4.0.11-1~bionic
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"
