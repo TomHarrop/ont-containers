@@ -2,15 +2,22 @@ Bootstrap: docker
 From: ubuntu:16.04
 
 %help
-    Guppy 3.3.3 with nvidia-430
+    Guppy 4.0.11 without nvidia drivers
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 3.3.3"
+    VERSION "Guppy 4.0.11"
 
 %post
-    # faster apt downloads, will it break?
     export DEBIAN_FRONTEND=noninteractive
+    
+    # set up apt
+    apt-get clean
+    rm -r /var/lib/apt/lists/*
+    apt-get  update
+    apt-get upgrade -y --fix-missing
+
+
     (
         . /etc/os-release
         cat << _EOF_ > mirror.txt
@@ -34,12 +41,12 @@ _EOF_
         wget 
 
     # byo nvidia driver
-    add-apt-repository -y ppa:graphics-drivers/ppa
-    apt update
-    apt-get install -y \
-        --no-install-recommends \
-        libcuda1-430 \
-        nvidia-430
+    # add-apt-repository -y ppa:graphics-drivers/ppa
+    # apt update
+    # apt-get install -y \
+    #     --no-install-recommends \
+    #     libcuda1-430 \
+    #     nvidia-430
 
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
@@ -51,7 +58,7 @@ _EOF_
     apt-get update
     apt-get install -y \
         --no-install-recommends \
-        ont-guppy=3.3.3-1~xenial
+        ont-guppy=4.0.11-1~xenial
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"

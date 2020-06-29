@@ -2,7 +2,7 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    ONT MinKNOW 19.10.1-1 GUI in a container
+    ONT MinKNOW 19.12.5 GUI in a container
 
     Run as follows:
 
@@ -13,11 +13,17 @@ From: ubuntu:18.04
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "MinKNOW 19.10.1-1"
+    VERSION "MinKNOW 19.12.5"
 
 %post
-    # faster apt downloads, will it break?
     export DEBIAN_FRONTEND=noninteractive
+
+    # set up apt
+    apt-get clean
+    rm -r /var/lib/apt/lists/*
+    apt-get  update
+    apt-get upgrade -y --fix-missing
+
     (
         . /etc/os-release
         cat << _EOF_ > mirror.txt
@@ -49,7 +55,7 @@ _EOF_
     echo "deb http://mirror.oxfordnanoportal.com/apt bionic-stable non-free" \
         | tee /etc/apt/sources.list.d/nanoporetech.sources.list
     apt update
-    apt install -y minknow-nc=19.10.1-1~bionic
+    apt install -y minknow-nc=19.12.5-1~bionic
 
 %startscript
     /opt/ONT/MinKNOW/bin/mk_manager_svc &
