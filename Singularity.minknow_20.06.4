@@ -60,6 +60,4 @@ _EOF_
     apt install -y minknow-nc=20.06.4-1~bionic
 
 %startscript
-    nohup /opt/ont/ui/kingfisher/MinKNOW &
-
-
+    /opt/ont/minknow/bin/mk_manager_svc & /opt/ont/ui/kingfisher/MinKNOW
