@@ -2,11 +2,11 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    Guppy 4.0.11 without nvidia drivers
+    Guppy 4.0.14 CPU version
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 4.0.11"
+    VERSION "Guppy 4.0.14"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -36,18 +36,8 @@ _EOF_
     apt-get install -y \
         apt-transport-https \
         lsb-release \
-        nvidia-modprobe \
         software-properties-common \
         wget 
-
-    # byo nvidia driver
-    # add-apt-repository -y ppa:graphics-drivers/ppa
-    # apt update
-    # apt-get install -y \
-    #     --no-install-recommends \
-    #     libcuda1-430 \
-    #     nvidia-430
-
 
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
@@ -59,8 +49,7 @@ _EOF_
     apt-get update
 
     apt-get install -y \
-        --no-install-recommends \
-        ont-guppy=4.0.11-1~bionic
+        ont-guppy-cpu=4.0.14-1~bionic
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"
