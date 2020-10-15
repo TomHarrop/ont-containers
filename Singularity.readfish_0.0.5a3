@@ -2,13 +2,13 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    readfish 0.0.5a1 from pip
+    readfish 0.0.5a3 from pip
     MinKNOW (minion-nc) 20.06.5-1~bionic
     Guppy (ont-guppy) 4.2.2-1~bionic
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "readfish 0.0.5a1"
+    VERSION "readfish 0.0.5a3"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -33,6 +33,7 @@ _EOF_
     )
 
     # install dependencies
+    # (needs pip)
     apt update
     apt install -y \
         apt-transport-https \
@@ -45,8 +46,10 @@ _EOF_
         libnss3 \
         libxss1 \
         lsb-release \
-        python3-pip \
         nvidia-modprobe \
+        python3-pip \
+        python3.7 \
+        python3.7-dev \
         software-properties-common \
         wget 
 
@@ -64,12 +67,16 @@ _EOF_
         ont-guppy=4.2.2-1~bionic
 
     # setup python and install readfish
-    /usr/bin/python3 -m pip install --upgrade pip setuptools wheel
-    /usr/bin/python3 -m pip install \
+    /usr/bin/python3.7 -m pip install --upgrade pip setuptools wheel
+    /usr/bin/python3.7 -m pip install \
         git+https://github.com/nanoporetech/read_until_api@v3.0.0
-    /usr/bin/python3 -m pip install \
-        readfish==0.0.5a1
 
+    # install readfish from wheel on pypi
+    # this is a bit of a hack but it's set to python==3.7 
+    # so it won't install on 3.7.5 (maybe a mistake?)
+    /usr/bin/python3.7 -m pip install \
+        --ignore-requires-python \
+        readfish==0.0.5a3
 
 %runscript
     exec /usr/local/bin/readfish "@$"
