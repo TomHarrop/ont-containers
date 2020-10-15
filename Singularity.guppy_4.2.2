@@ -2,11 +2,11 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    Guppy 4.0.14 without nvidia drivers
+    Guppy 4.2.2 without nvidia drivers
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 4.0.14"
+    VERSION "Guppy 4.2.2"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -60,7 +60,7 @@ _EOF_
 
     apt-get install -y \
         --no-install-recommends \
-        ont-guppy=4.0.14-1~bionic
+        ont-guppy=4.2.2-1~bionic
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"
