@@ -2,18 +2,19 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    ONT MinKNOW 20.06.4 GUI in a container
+    ONT MinKNOW 20.06.5 GUI in a container
 
     Run as follows:
 
     singularity instance start \
+        --nv \
         -B output/dir/run:/run,output/dir/var:/var \
-        minknow_20.06.4.sif \
+        minknow_20.06.5.sif \
         minknow
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "MinKNOW 20.06.4"
+    VERSION "MinKNOW 20.06.5"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -57,7 +58,7 @@ _EOF_
     echo "deb http://mirror.oxfordnanoportal.com/apt bionic-stable non-free" \
         | tee /etc/apt/sources.list.d/nanoporetech.sources.list
     apt update
-    apt install -y minknow-nc=20.06.4-1~bionic
+    apt install -y minion-nc=20.06.5-1~bionic
 
 %startscript
     /opt/ont/minknow/bin/mk_manager_svc & /opt/ont/ui/kingfisher/MinKNOW
