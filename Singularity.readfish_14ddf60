@@ -1,0 +1,51 @@
+Bootstrap: shub
+From: TomHarrop/ont-containers:minknow_19.12.5
+
+%help
+    readfish 14ddf60 from github
+    MinKNOW 19.12.5 (MinKNOW core 3.6.5)
+    Guppy 3.4.5+fb1fbfb at /guppy/bin
+    Loose lab read until API 4973c67
+
+%labels
+    MAINTAINER "Tom Harrop"
+    VERSION "readfish 14ddf60"
+
+%environment
+    export PATH="/guppy/bin:${PATH}"
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    export PATH="/guppy/bin:${PATH}"
+
+    # install dependencies
+    apt-get update
+    apt-get install -y \
+        git \
+        libidn11 \
+        python3-pip \
+        python3.7 \
+        python3.7-dev
+
+    # install legacy guppy
+    wget \
+        -O /guppy.tar.gz \
+        --no-check-certificate \
+        https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy_3.4.5_linux64.tar.gz
+    mkdir /guppy
+    tar -zxf /guppy.tar.gz \
+        -C /guppy \
+        --strip-components 1
+    rm -f /guppy.tar.gz
+
+    # setup python and install readfish
+    /usr/bin/python3.7 -m pip install --upgrade pip setuptools wheel
+    /usr/bin/python3.7 -m pip install \
+        git+https://github.com/LooseLab/read_until_api_v2@4973c67
+
+    # install readfish from github
+    /usr/bin/python3.7 -m pip install \
+        git+https://github.com/LooseLab/readfish@14ddf60
+
+%runscript
+    exec /usr/local/bin/readfish "@$"
