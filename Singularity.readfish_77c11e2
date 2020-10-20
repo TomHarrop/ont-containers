@@ -46,6 +46,7 @@ _EOF_
         libnss3 \
         libxss1 \
         lsb-release \
+        minimap2 \
         nvidia-modprobe \
         python3-pip \
         python3.7 \
@@ -67,7 +68,10 @@ _EOF_
         ont-guppy=4.2.2-1~bionic
 
     # setup python and install readfish
-    /usr/bin/python3.7 -m pip install --upgrade pip setuptools wheel
+    /usr/bin/python3.7 -m pip install --upgrade \
+        pip \
+        setuptools \
+        wheel
     /usr/bin/python3.7 -m pip install \
         git+https://github.com/nanoporetech/read_until_api@v3.0.0
 
@@ -81,6 +85,10 @@ _EOF_
     # install readfish from github
     /usr/bin/python3.7 -m pip install \
         git+https://github.com/LooseLab/readfish@77c11e2
+
+    # fix missing dep
+    /usr/bin/python3.7 -m pip install \
+        ont_pyguppy_client_lib
 
 %runscript
     exec /usr/local/bin/readfish "@$"
