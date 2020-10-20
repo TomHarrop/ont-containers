@@ -2,13 +2,13 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    readfish 0.0.5a3 from pip
+    readfish 77c11e2 from github
     MinKNOW (minion-nc) 20.06.5-1~bionic
     Guppy (ont-guppy) 4.2.2-1~bionic
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "readfish 0.0.5a3"
+    VERSION "readfish 77c11e2"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -74,9 +74,13 @@ _EOF_
     # install readfish from wheel on pypi
     # this is a bit of a hack but it's set to python==3.7 
     # so it won't install on 3.7.5 (maybe a mistake?)
+    # /usr/bin/python3.7 -m pip install \
+    #     --ignore-requires-python \
+    #     readfish==0.0.5a3
+
+    # install readfish from github
     /usr/bin/python3.7 -m pip install \
-        --ignore-requires-python \
-        readfish==0.0.5a3
+        git+https://github.com/LooseLab/readfish@77c11e2
 
 %runscript
     exec /usr/local/bin/readfish "@$"

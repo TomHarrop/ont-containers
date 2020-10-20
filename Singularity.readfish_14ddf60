@@ -38,6 +38,21 @@ From: TomHarrop/ont-containers:minknow_19.12.5
         --strip-components 1
     rm -f /guppy.tar.gz
 
+    # configure minion to use GPU
+    # it will only work with the exact same version of guppy as guppy core (in minknow -> about)
+    # /opt/ont/minknow/bin/config_editor \
+    #     --conf application \
+    #     --filename /opt/ont/minknow/conf/app_conf \
+    #     --set guppy.server_executable="/guppy/bin/guppy_basecall_server" \
+    #     --set guppy.client_executable="/guppy/bin/guppy_basecaller" \
+    #     --set guppy.gpu_calling=1 \
+    #     --set guppy.num_threads=3 \
+    #     --set guppy.ipc_threads=2 \
+    #     --set guppy.gpu_devices="cuda:0"
+    # service minknow stop
+    # # pkill guppy_basecall_server
+    # service minknow start
+
     # setup python and install readfish
     /usr/bin/python3.7 -m pip install --upgrade pip setuptools wheel
     /usr/bin/python3.7 -m pip install \
