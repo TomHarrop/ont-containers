@@ -2,19 +2,19 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    ONT MinKNOW 20.06.5 GUI in a container
+    ONT MinKNOW 20.10.3 GUI in a container
 
     Run as follows:
 
     singularity instance start \
         --nv \
         -B output/dir/run:/run,output/dir/var:/var \
-        minknow_20.06.5.sif \
+        minknow_20.10.3.sif \
         minknow
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "MinKNOW 20.06.5"
+    VERSION "MinKNOW 20.10.3"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -49,16 +49,21 @@ _EOF_
         libgtk-3-dev \
         libnss3 \
         libxss1 \
+        software-properties-common \
         wget
 
-    # install minknow
-    wget \
-        -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub \
-        | apt-key add -
-    echo "deb http://mirror.oxfordnanoportal.com/apt bionic-stable non-free" \
-        | tee /etc/apt/sources.list.d/nanoporetech.sources.list
+    # install ONT repo
+    export PLATFORM=$(lsb_release -cs) 
+    wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub \
+        | apt-key add - 
+    echo \
+        "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" \
+        | tee /etc/apt/sources.list.d/nanoporetech.sources.list 
+    apt-get update
+
+
     apt update
-    apt install -y minion-nc=20.06.5-1~bionic
+    apt install -y minion-nc=20.10.3-1~bionic
 
 %startscript
     /opt/ont/minknow/bin/mk_manager_svc & /opt/ont/ui/kingfisher/MinKNOW
