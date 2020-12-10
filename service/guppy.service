@@ -1,0 +1,10 @@
+[Unit]
+Description=Guppy basecaller service
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart=bash /path/to/launch_server.sh
+
+[Install]
+WantedBy=default.target
